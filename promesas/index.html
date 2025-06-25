@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promesas ejemplo</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="icon" type="img.png" href="img/dr.jpeg">
+</head>
+<body class="bg-[url(img/dr.jpeg)] bg-scroll bg-cover min-h-screm p-4">
+
+
+<div class="flex justify-center bg-[#FFFFFF] overflow-visible">
+<h1  class="font-sans md:font-serif text-5xl  "> Promesas js  carga de imagen</h1>
+</div>
+<br/>
+<div>
+<div class="bg-white p6 rounded-lg shadow-md text-center ">
+    <button onclick="cargarimagen(true)" class="bg-[#E4DA22] border-4 border-double py-6 p-20 hover:bg-orange-400 cursor-pointer rounded mb-2 w-full">Cargar con exito</button>
+   
+    <button onclick="cargarimagen(false)" class="bg-[#E4DA22] border-4 border-double py-6 p-20 hover:bg-orange-400 cursor-pointer rounded  w-full">Cargar con errores</button>
+
+
+    <div id="mensaje" class="my-4 italic">Esperando
+    <div id="cargando" class="hidden">Esperando
+      <div class="w-8 h8 border-4 border-black-500 border-t-transparent rounded-full animate-spin">
+      
+        <img id="imagen" class="hidden max-w-full max-h-full">
+        <div id="error" class="hidden text red-500">Error</div>i
+      </div>
+        </div>
+        </div>
+</div>
+</div>
+
+<script>
+  //creacion de la promesa de carga de imagen
+  //estado pendiente
+  document.getElementById("mensaje").textContent = "cargando";
+  document.getElementById("cargando").classList.remove("hidden");
+  document.getElementById("imagen").classList.remove("hidden");
+  document.getElementById("error").classList.remove("hidden" );
+//simulamos una promesa para cargar una imagen
+new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            if(exito){
+                resolve("https://picsum.photos/200/300?grayscale")
+            }else{
+                reject("no esta conectando el servidor por eso no carga la imagen")
+            }
+
+
+        },1500);
+
+
+    })
+.then(url=>{
+    //estado resueltado exitosa
+    document.getElementById("imagen").textContent = "la imagen cargo bien";
+    document.getElementById("cargando").classList.add("hidden");
+    const img = document.getElementById("imagen");
+    img.src = url;
+    img.classList.remove("hidden");
+})
+.catch(mensajeError=>{
+    //estado rechazado
+    document.getElementById("error").textContent = error;
+    document.getElementById("cargando").classList.add("hidden");
+    const img = document.getElementById("error");
+    img.classList.remove("hidden");
+})
+    
+      
+
+
+    
+
+
+    
+  
+</script>
+
+
+</body>
+</html>
